@@ -1,7 +1,8 @@
 "use client";
-
+//@ts-ignore:allow side-effect CSS import without type declarations
+import"./globals.css";
 import { Geist, Geist_Mono } from "next/font/google";
-import "../globals.css"
+
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
