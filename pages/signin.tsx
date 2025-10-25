@@ -11,9 +11,16 @@ export default function SignInPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const res = await authClient.signIn.email({ email, password });
-    if (res?.ok) router.push("/dashboard");
-    else alert(res?.error ?? "Login failed");
+    try {
+      const res = await authClient.signIn.email({ email, password });
+      if (res.data) {
+        router.push("/dashboard");
+      } else {
+        alert(res.error?.message ?? "Login failed");
+      }
+    } catch (error) {
+      alert("Login failed");
+    }
   };
 
   return (

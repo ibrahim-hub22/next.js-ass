@@ -13,6 +13,7 @@
     "@prisma/client": "^6.17.1",
     "@tanstack/react-query": "^5.90.2",
     "axios": "^1.12.2",
+    "better-auth": "^1.3.30",
     "dexie": "^4.2.1",
     "install": "^0.13.0",
     "localforage": "^1.10.0",
