@@ -7,19 +7,34 @@ import { useRouter } from "next/router";
 export default function SignUpPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const res = await authClient.signUp.email({ email, password });
-    if (res?.ok) router.push("/signin");
-    else alert(res?.error ?? "Sign up failed");
+    try {
+      const res = await authClient.signUp.email({ email, password, name });
+      if (res.data) {
+        router.push("/signin");
+      } else {
+        alert(res.error?.message ?? "Sign up failed");
+      }
+    } catch (error) {
+      alert("Sign up failed");
+    }
   };
 
   return (
     <main style={{ maxWidth: 400, margin: "40px auto" }}>
       <h2>Sign Up</h2>
       <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
         <input
           type="email"
           placeholder="Email"
